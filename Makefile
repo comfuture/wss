@@ -2,24 +2,24 @@
 # Run all tests
 #
 test: 
-	node test/less-test.js
+	node test/wss-test.js
 
 #
 # Run benchmark
 #
 benchmark:
-	node benchmark/less-benchmark.js
+	node benchmark/wss-benchmark.js
 
 #
 # Build less.js
 #
-SRC = lib/less
+SRC = lib/wss
 HEADER = build/header.js
 VERSION = `cat package.json | grep version \
 														| grep -o '[0-9]\.[0-9]\.[0-9]\+'`
-DIST = dist/less-${VERSION}.js
-RHINO = dist/less-rhino-${VERSION}.js
-DIST_MIN = dist/less-${VERSION}.min.js
+DIST = dist/wss-${VERSION}.js
+RHINO = dist/wss-rhino-${VERSION}.js
+DIST_MIN = dist/wss-${VERSION}.min.js
 
 less:
 	@@mkdir -p dist
@@ -50,13 +50,13 @@ rhino:
 	      ${SRC}/rhino.js > ${RHINO}
 	@@echo ${RHINO} built.
 
-min: less
+min: wss
 	@@echo minifying...
 	@@uglifyjs ${DIST} > ${DIST_MIN}
 	@@echo ${DIST_MIN} built.
 
-server: less
-	cp dist/less-${VERSION}.js test/html/
+server: wss
+	cp dist/wss-${VERSION}.js test/html/
 	cd test/html && python -m SimpleHTTPServer
 
 clean:
@@ -65,11 +65,11 @@ clean:
 dist: clean min
 	git add dist/*
 	git commit -a -m "(dist) build ${VERSION}"
-	git archive master --prefix=less/ -o less-${VERSION}.tar.gz
-	npm publish less-${VERSION}.tar.gz
+	git archive master --prefix=wss/ -o wss-${VERSION}.tar.gz
+	npm publish wss-${VERSION}.tar.gz
 
 stable:
-	npm tag less ${VERSION} stable
+	npm tag wss ${VERSION} stable
 
 
 .PHONY: test benchmark

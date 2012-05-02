@@ -2,6 +2,6 @@
 // Stub out `require` in rhino
 //
 function require(arg) {
-    return less[arg.split('/')[1]];
+    return wss[arg.split('/')[1]];
 };
 

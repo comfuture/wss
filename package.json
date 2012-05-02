@@ -1,13 +1,13 @@
 {
-  "name"          : "less",
-  "description"   : "Leaner CSS",
-  "url"           : "http://lesscss.org",
-  "keywords"      : ["css", "parser", "lesscss", "browser"],
-  "author"        : "Alexis Sellier <self@cloudhead.net>",
+  "name"          : "wss",
+  "description"   : "Web application structure script",
+  "url"           : "http://wss.maroo.info",
+  "keywords"      : ["css", "parser", "lesscss", "browser", "javascript"],
+  "author"        : "Chang kyun, Kim <comfuture@gmail.com>",
   "contributors"  : [],
-  "version"       : "1.3.0",
-  "bin"           : { "lessc": "./bin/lessc" },
-  "main"          : "./lib/less/index",
+  "version"       : "0.1",
+  "bin"           : { "wssc": "./bin/wssc" },
+  "main"          : "./lib/wss/index",
   "directories"   : { "test": "./test" },
   "engines"       : { "node": ">=0.4.0" }
 }
