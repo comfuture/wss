@@ -1,2 +1,2 @@
-@import "import-test-b.less";
+@import "import-test-b.wss";
 @a: 20%;

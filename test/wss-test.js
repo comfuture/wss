@@ -2,29 +2,29 @@ var path = require('path'),
     fs = require('fs'),
     sys = require('util');
 
-var less = require('../lib/less');
+var wss = require('../lib/wss');
 
-less.tree.functions.add = function (a, b) {
-    return new(less.tree.Dimension)(a.value + b.value);
+wss.tree.functions.add = function (a, b) {
+    return new(wss.tree.Dimension)(a.value + b.value);
 }
-less.tree.functions.increment = function (a) {
-    return new(less.tree.Dimension)(a.value + 1);
+wss.tree.functions.increment = function (a) {
+    return new(wss.tree.Dimension)(a.value + 1);
 }
-less.tree.functions._color = function (str) {
-    if (str.value === "evil red") { return new(less.tree.Color)("600") }
+wss.tree.functions._color = function (str) {
+    if (str.value === "evil red") { return new(wss.tree.Color)("600") }
 }
 
-sys.puts("\n" + stylize("LESS", 'underline') + "\n");
+sys.puts("\n" + stylize("wss", 'underline') + "\n");
 
-fs.readdirSync('test/less').forEach(function (file) {
-    if (! /\.less/.test(file)) { return }
+fs.readdirSync('test/wss').forEach(function (file) {
+    if (! /\.wss/.test(file)) { return }
 
-    toCSS('test/less/' + file, function (err, less) {
-        var name = path.basename(file, '.less');
+    toCSS('test/wss/' + file, function (err, wss) {
+        var name = path.basename(file, '.wss');
 
         fs.readFile(path.join('test/css', name) + '.css', 'utf-8', function (e, css) {
             sys.print("- " + name + ": ")
-            if (less === css) { sys.print(stylize('OK', 'green')) }
+            if (wss === css) { sys.print(stylize('OK', 'green')) }
             else if (err) {
                 sys.print(stylize("ERROR: " + (err && err.message), 'red'));
             } else {
@@ -40,7 +40,7 @@ function toCSS(path, callback) {
     fs.readFile(path, 'utf-8', function (e, str) {
         if (e) { return callback(e) }
 
-        new(less.Parser)({
+        new(wss.Parser)({
             paths: [require('path').dirname(path)],
             optimization: 0
         }).parse(str, function (err, tree) {
